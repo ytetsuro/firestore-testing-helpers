@@ -5,4 +5,4 @@ clean:
 
 build:	./src
 	./node_modules/.bin/tsc -b \
-	&& find ./dist/ -name '*.ts' | grep /__tests__/ | xargs rm
+	&& find ./dist/ -name '*.ts'
