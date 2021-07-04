@@ -1,0 +1,33 @@
+---
+env:
+  es2020: true
+  jest/globals: true
+parser: '@typescript-eslint/parser'
+parserOptions:
+  project: ./tsconfig.lint.json
+plugins:
+  - jest
+  - '@typescript-eslint'
+extends:
+  - eslint:recommended
+  - plugin:@typescript-eslint/eslint-recommended
+  - plugin:@typescript-eslint/recommended
+  - plugin:jest/recommended
+  - prettier
+rules:
+  "@typescript-eslint/no-unused-vars":
+    - error
+    -
+      argsIgnorePattern: "^_"
+  "@typescript-eslint/explicit-function-return-type":
+    - off
+  "@typescript-eslint/explicit-module-boundary-types":
+    - off
+  "@typescript-eslint/no-non-null-assertion":
+    - off
+  "max-len":
+    - warn
+    -
+      code: 120
+      ignoreComments: true
+      ignorePattern: '^import\s.+\sfrom\s.+;$'
