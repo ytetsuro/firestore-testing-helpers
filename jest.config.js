@@ -1,7 +1,7 @@
 module.exports = {
-  /*setupFilesAfterEnv: [
-    './TestBootstrap.ts',
-  ],*/
+  setupFilesAfterEnv: [
+    './src/__tests__/Bootstrap.ts',
+  ],
   roots: [
     '<rootDir>/src',
   ],
