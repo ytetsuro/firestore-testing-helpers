@@ -11,7 +11,7 @@
   },
   "keywords": ["firestore", "testing", "fixture", "seeder", "parallel test"],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "engines": {
     "node": ">=10.0.0"
   },
