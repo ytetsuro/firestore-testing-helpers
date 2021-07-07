@@ -69,3 +69,10 @@ describe('User', () => {
 });
 ```
 
+### Export
+
+If you want to export the existing remote firestore data, please execute the following command.
+
+```bash
+$ firestore-export -a /path/to/serviceAccount.json -p collection/document
+```
