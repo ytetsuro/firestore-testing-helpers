@@ -9,7 +9,7 @@
     "prepack": "make",
     "test": "./bin/run-test.sh"
   },
-  "keywords": [],
+  "keywords": ["firestore", "testing", "fixture", "seeder", "parallel test"],
   "author": "",
   "license": "ISC",
   "engines": {
@@ -18,6 +18,9 @@
   "bin": {
     "firestore-export": "./dist/bin/index.js"
   },
+  "files": [
+    "/dist"
+  ],
   "devDependencies": {
     "@firebase/rules-unit-testing": ">=1.2.8 <2.0.0",
     "@types/jest": "^26.0.23",

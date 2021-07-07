@@ -9,6 +9,12 @@ Please feel free to PullRequest and Issue.
 
 This repository provides several helpers to facilitate testing in environments that use Firestore.
 
+## Installation
+
+```bash
+$ npm i -D firestore-testing-helpers
+```
+
 ## Emulator Connector Store
 
 It provides an independent Firestore Connection for each test.
