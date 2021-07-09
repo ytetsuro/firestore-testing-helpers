@@ -1,6 +1,6 @@
 {
   "name": "firestore-testing-helpers",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "This repository is a helper for writing tests using Firestore.",
   "main": "dist/index.js",
   "scripts": {
