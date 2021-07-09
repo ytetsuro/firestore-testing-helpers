@@ -1,12 +1,12 @@
 import { firestore } from "firebase-admin";
-import { FirestoreEmulatorConnectorStore } from "../FirestoreEmulatorConnectorStore";
+import { FirebaseEmulatorConnectorStore } from "../FirebaseEmulatorConnectorStore";
 import { Converter } from "../Converter";
 
 describe("Converter", () => {
   let connection: firestore.Firestore;
   let converter: Converter;
   beforeAll(() => {
-    const connector = FirestoreEmulatorConnectorStore.getConnector();
+    const connector = FirebaseEmulatorConnectorStore.getConnector();
     connection = connector.getAdminFirestore();
     converter = new Converter(connection);
   });

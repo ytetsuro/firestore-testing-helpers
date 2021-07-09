@@ -6,7 +6,7 @@ import {
 import crypto from "crypto";
 import { app } from "firebase-admin";
 
-export class FirestoreEmulatorConnector {
+export class FirebaseEmulatorConnector {
   private adminFirebaseApp: app.App | null = null;
   private firebaseApps: Map<
     string,
@@ -15,17 +15,21 @@ export class FirestoreEmulatorConnector {
 
   constructor(private readonly projectId: string) {}
 
-  getAdminFirestore() {
+  getAdminApp() {
     if (this.adminFirebaseApp === null) {
       this.adminFirebaseApp = firebase.initializeAdminApp({
         projectId: this.projectId,
       });
     }
 
-    return this.adminFirebaseApp!.firestore();
+    return this.adminFirebaseApp!;
   }
 
-  getFirestore(auth?: TokenOptions) {
+  getAdminFirestore() {
+    return this.getAdminApp().firestore();
+  }
+
+  getApp(auth?: TokenOptions) {
     const optionHash = crypto
       .createHash("sha1")
       .update(JSON.stringify(auth ?? {}))
@@ -40,7 +44,11 @@ export class FirestoreEmulatorConnector {
       this.firebaseApps.set(optionHash, firebase.initializeTestApp(config));
     }
 
-    return this.firebaseApps.get(optionHash)!.firestore();
+    return this.firebaseApps.get(optionHash)!;
+  }
+
+  getFirestore(auth?: TokenOptions) {
+    return this.getApp(auth).firestore();
   }
 
   clearFirestore() {

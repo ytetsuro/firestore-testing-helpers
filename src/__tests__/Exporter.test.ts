@@ -1,10 +1,10 @@
-import { FirestoreEmulatorConnectorStore } from "../FirestoreEmulatorConnectorStore";
-import { FirestoreEmulatorConnector } from "../FirestoreEmulatorConnector";
+import { FirebaseEmulatorConnectorStore } from "../FirebaseEmulatorConnectorStore";
+import { FirebaseEmulatorConnector } from "../FirebaseEmulatorConnector";
 import { Exporter } from "../Exporter";
 import { Seeder } from "../Seeder";
 
 describe("Exporter", () => {
-  const connector = FirestoreEmulatorConnectorStore.getConnector();
+  const connector = FirebaseEmulatorConnectorStore.getConnector();
   beforeAll(async () => {
 
     await new (class extends Seeder {

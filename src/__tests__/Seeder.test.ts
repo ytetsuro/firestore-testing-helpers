@@ -1,10 +1,10 @@
 import { firestore } from "firebase-admin";
-import { FirestoreEmulatorConnector } from "../FirestoreEmulatorConnector";
-import { FirestoreEmulatorConnectorStore } from "../FirestoreEmulatorConnectorStore";
+import { FirebaseEmulatorConnector } from "../FirebaseEmulatorConnector";
+import { FirebaseEmulatorConnectorStore } from "../FirebaseEmulatorConnectorStore";
 import { Seeder } from "../Seeder";
 
 describe("Seeder", () => {
-  let connector: FirestoreEmulatorConnector = FirestoreEmulatorConnectorStore.getConnector();
+  let connector: FirebaseEmulatorConnector = FirebaseEmulatorConnectorStore.getConnector();
 
   beforeEach(() => {
     return connector.clearFirestore();
