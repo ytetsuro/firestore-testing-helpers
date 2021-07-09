@@ -28,7 +28,7 @@ import { target } from '../path/to/test/target';
 describe('User', () => {
   let connection;
   beforeAll(() => {
-    connection = FirestoreEmulatorConnectorStore.getConnector();
+    connection = FirestoreEmulatorConnectorStore.getConnector().getAdminFirestore();
   });
 ...
 });
@@ -63,7 +63,7 @@ import { UserSeeder } from './fixtures/UserSeeder';
 
 describe('User', () => {
   beforeAll(() => {
-    return (new UserSeeder(FirestoreEmulatorConnectorStore.getConnector())).run();
+    return (new UserSeeder(FirestoreEmulatorConnectorStore.getConnector().getAdminFirestore())).run();
   });
 ...
 });
