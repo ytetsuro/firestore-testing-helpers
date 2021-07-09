@@ -17,18 +17,18 @@ $ npm i -D firestore-testing-helpers
 
 ## Emulator Connector Store
 
-It provides an independent Firestore Connection for each test.
+It provides an independent Firebase Connection for each test.
 Thus, you will be relieved from a very annoying test with runInBand.
 
 ```typescript
-import { FirestoreEmulatorConnectorStore } from "firestore-testing-helpers";
+import { FirebaseEmulatorConnectorStore } from "firestore-testing-helpers";
 import { target } from '../path/to/test/target';
 
 
 describe('User', () => {
   let connection;
   beforeAll(() => {
-    connection = FirestoreEmulatorConnectorStore.getConnector().getAdminFirestore();
+    connection = FirebaseEmulatorConnectorStore.getConnector().getAdminApp().firestore();
   });
 ...
 });
@@ -58,7 +58,7 @@ export class UserSeeder extends Seeder {
 Seeder is very simple, just run the run method at test time.
 
 ```typescript
-import { FirestoreEmulatorConnectorStore } from "firestore-testing-helpers";
+import { FirebaseEmulatorConnectorStore } from "firestore-testing-helpers";
 import { UserSeeder } from './fixtures/UserSeeder';
 
 describe('User', () => {
