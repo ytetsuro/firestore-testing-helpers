@@ -48,9 +48,9 @@ export class FirestoreEmulatorConnector {
   }
 
   cleanup() {
-    this.adminFirebaseApp!.delete();
+    this.adminFirebaseApp?.delete?.();
     this.adminFirebaseApp = null;
-    this.firebaseApps.forEach((app) => app.delete());
+    this.firebaseApps.forEach((app) => app?.delete?.());
     this.firebaseApps.clear();
   }
 }
