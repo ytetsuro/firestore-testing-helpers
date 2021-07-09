@@ -4,9 +4,9 @@ import { Exporter } from "../Exporter";
 import { Seeder } from "../Seeder";
 
 describe("Exporter", () => {
-  let connector: FirestoreEmulatorConnector;
+  const connector = FirestoreEmulatorConnectorStore.getConnector();
   beforeAll(async () => {
-    connector = await FirestoreEmulatorConnectorStore.getConnector();
+
     await new (class extends Seeder {
       protected async call() {
         return this.import("collection", {

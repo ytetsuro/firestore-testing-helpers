@@ -5,8 +5,8 @@ import { Converter } from "../Converter";
 describe("Converter", () => {
   let connection: firestore.Firestore;
   let converter: Converter;
-  beforeAll(async () => {
-    const connector = await FirestoreEmulatorConnectorStore.getConnector();
+  beforeAll(() => {
+    const connector = FirestoreEmulatorConnectorStore.getConnector();
     connection = connector.getAdminFirestore();
     converter = new Converter(connection);
   });

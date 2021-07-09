@@ -27,8 +27,8 @@ import { target } from '../path/to/test/target';
 
 describe('User', () => {
   let connection;
-  beforeAll(async () => {
-    connection = await FirestoreEmulatorConnectorStore.getConnector();
+  beforeAll(() => {
+    connection = FirestoreEmulatorConnectorStore.getConnector();
   });
 ...
 });
@@ -62,8 +62,8 @@ import { FirestoreEmulatorConnectorStore } from "firestore-testing-helpers";
 import { UserSeeder } from './fixtures/UserSeeder';
 
 describe('User', () => {
-  beforeAll(async () => {
-    return (new UserSeeder(await FirestoreEmulatorConnectorStore.getConnector())).run();
+  beforeAll(() => {
+    return (new UserSeeder(FirestoreEmulatorConnectorStore.getConnector())).run();
   });
 ...
 });

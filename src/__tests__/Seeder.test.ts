@@ -4,10 +4,7 @@ import { FirestoreEmulatorConnectorStore } from "../FirestoreEmulatorConnectorSt
 import { Seeder } from "../Seeder";
 
 describe("Seeder", () => {
-  let connector: FirestoreEmulatorConnector;
-  beforeAll(async () => {
-    connector = await FirestoreEmulatorConnectorStore.getConnector();
-  });
+  let connector: FirestoreEmulatorConnector = FirestoreEmulatorConnectorStore.getConnector();
 
   beforeEach(() => {
     return connector.clearFirestore();

@@ -10,7 +10,7 @@ export class FirestoreEmulatorConnectorStore {
     this.generateIdentity = identityGenerator;
   }
 
-  static async getConnector() {
+  static getConnector() {
     const identity: string = FirestoreEmulatorConnectorStore.generateIdentity();
 
     if (!FirestoreEmulatorConnectorStore.instances.has(identity)) {
