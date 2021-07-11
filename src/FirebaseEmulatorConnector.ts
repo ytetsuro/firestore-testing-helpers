@@ -4,10 +4,10 @@ import {
   TokenOptions,
 } from "@firebase/rules-unit-testing/dist/src/api/index";
 import crypto from "crypto";
-import { app } from "firebase-admin";
+import * as admin from "firebase-admin";
 
 export class FirebaseEmulatorConnector {
-  private adminFirebaseApp: app.App | null = null;
+  private adminFirebaseApp: admin.app.App | null = null;
   private firebaseApps: Map<
     string,
     ReturnType<typeof firebase.initializeTestApp>
@@ -17,8 +17,13 @@ export class FirebaseEmulatorConnector {
 
   getAdminApp() {
     if (this.adminFirebaseApp === null) {
-      this.adminFirebaseApp = firebase.initializeAdminApp({
+      this.adminFirebaseApp = admin.initializeApp({
         projectId: this.projectId,
+      });
+
+      this.adminFirebaseApp.firestore().settings({
+        host: this.getFirestoreHost(),
+        ssl: false,
       });
     }
 
@@ -60,5 +65,9 @@ export class FirebaseEmulatorConnector {
     this.adminFirebaseApp = null;
     this.firebaseApps.forEach((app) => app?.delete?.());
     this.firebaseApps.clear();
+  }
+
+  private getFirestoreHost() {
+    return process.env.FIRESTORE_EMULATOR_HOST ?? 'localhost:8080';
   }
 }

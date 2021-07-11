@@ -4,7 +4,7 @@ import { Exporter } from "../Exporter";
 import { Seeder } from "../Seeder";
 
 describe("Exporter", () => {
-  const connector = FirebaseEmulatorConnectorStore.getConnector();
+  const connector: FirebaseEmulatorConnector = FirebaseEmulatorConnectorStore.getConnector();
   beforeAll(async () => {
 
     await new (class extends Seeder {
