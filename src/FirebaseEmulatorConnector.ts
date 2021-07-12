@@ -19,7 +19,7 @@ export class FirebaseEmulatorConnector {
     if (this.adminFirebaseApp === null) {
       this.adminFirebaseApp = admin.initializeApp({
         projectId: this.projectId,
-      });
+      }, this.getRandomName());
 
       this.adminFirebaseApp.firestore().settings({
         host: this.getFirestoreHost(),
@@ -69,5 +69,9 @@ export class FirebaseEmulatorConnector {
 
   private getFirestoreHost() {
     return process.env.FIRESTORE_EMULATOR_HOST ?? 'localhost:8080';
+  }
+
+  private getRandomName() {
+    return `firestore-testing-helpers-${this.projectId}-${(new Date).getTime()}-${Math.random()}`;
   }
 }
