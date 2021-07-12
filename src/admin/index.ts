@@ -1,8 +1,8 @@
 import * as admin from 'firebase-admin';
 import { FirebaseEmulatorConnectorStore } from '../FirebaseEmulatorConnectorStore';
 
-export default {
+export = {
     ...admin,
-    initializeApp: () => FirebaseEmulatorConnectorStore.getConnector().getAdminApp(),
-    firestore: Object.assign(() => FirebaseEmulatorConnectorStore.getConnector().getAdminFirestore(), admin.firestore)
+    initializeApp: (_?: admin.AppOptions, __?: string) => FirebaseEmulatorConnectorStore.getConnector().getAdminApp(),
+    firestore: Object.assign((_?: admin.app.App) => FirebaseEmulatorConnectorStore.getConnector().getAdminFirestore(), admin.firestore)
 }
