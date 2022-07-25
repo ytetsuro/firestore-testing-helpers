@@ -22,7 +22,7 @@
     "/dist"
   ],
   "devDependencies": {
-    "@firebase/rules-unit-testing": ">=1.2.8 <2.0.0",
+    "@firebase/rules-unit-testing": ">=1.2.8 <3.0.0",
     "@types/jest": "^26.0.23",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
     "@typescript-eslint/parser": "^4.27.0",
@@ -39,7 +39,7 @@
     "typescript": "^4.3.4"
   },
   "peerDependencies": {
-    "@firebase/rules-unit-testing": ">=1.2.8 <2.0.0",
+    "@firebase/rules-unit-testing": ">=1.2.8 <3.0.0",
     "firebase-admin": ">=8.0.0 <10.0.0"
   },
   "dependencies": {
