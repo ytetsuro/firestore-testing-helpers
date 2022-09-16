@@ -1,6 +1,6 @@
 {
   "name": "firestore-testing-helpers",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "This repository is a helper for writing tests using Firestore.",
   "main": "dist/index.js",
   "scripts": {
@@ -22,7 +22,7 @@
     "/dist"
   ],
   "devDependencies": {
-    "@firebase/rules-unit-testing": ">=1.2.8 <2.0.0",
+    "@firebase/rules-unit-testing": ">=1.2.8 <3.0.0",
     "@types/jest": "^26.0.23",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
     "@typescript-eslint/parser": "^4.27.0",
@@ -31,7 +31,7 @@
     "eslint": "^7.28.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jest": "^24.3.6",
-    "firebase-admin": ">=8.0.0 <10.0.0",
+    "firebase-admin": ">=8.0.0 <=^10.3.0",
     "firebase-tools": "^9.13.1",
     "jest": "^26.6.3",
     "prettier": "^2.3.2",
@@ -39,8 +39,8 @@
     "typescript": "^4.3.4"
   },
   "peerDependencies": {
-    "@firebase/rules-unit-testing": ">=1.2.8 <2.0.0",
-    "firebase-admin": ">=8.0.0 <10.0.0"
+    "@firebase/rules-unit-testing": ">=1.2.8 <3.0.0",
+    "firebase-admin": ">=8.0.0 <=^10.3.0"
   },
   "dependencies": {
     "commander": "^4.1.1",

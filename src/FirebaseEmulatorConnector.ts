@@ -1,8 +1,4 @@
 import * as firebase from "@firebase/rules-unit-testing";
-import {
-  AppOptions,
-  TokenOptions,
-} from "@firebase/rules-unit-testing/dist/src/api/index";
 import crypto from "crypto";
 import * as admin from "firebase-admin";
 
@@ -10,10 +6,22 @@ export class FirebaseEmulatorConnector {
   private adminFirebaseApp: admin.app.App | null = null;
   private firebaseApps: Map<
     string,
-    ReturnType<typeof firebase.initializeTestApp>
+    firebase.RulesTestContext
   > = new Map();
 
+  private testEnv?: firebase.RulesTestEnvironment;
+
   constructor(private readonly projectId: string) {}
+
+  private async getTestEnv() {
+    if (!this.testEnv) {
+      this.testEnv = await firebase.initializeTestEnvironment({
+        projectId: this.projectId,
+      });
+    }
+
+    return this.testEnv;
+  }
 
   getAdminApp() {
     if (this.adminFirebaseApp === null) {
@@ -34,36 +42,33 @@ export class FirebaseEmulatorConnector {
     return this.getAdminApp().firestore();
   }
 
-  getApp(auth?: TokenOptions) {
+  async getApp(uid?: string) {
     const optionHash = crypto
       .createHash("sha1")
-      .update(JSON.stringify(auth ?? {}))
+      .update(JSON.stringify(uid ?? {}))
       .digest("hex");
 
     if (!this.firebaseApps.has(optionHash)) {
-      const config: AppOptions = {
-        projectId: this.projectId,
-        auth: auth ? auth : undefined,
-      };
+      const testEnv = await this.getTestEnv();
+      const clientApp = uid ? testEnv.authenticatedContext(uid) : testEnv.unauthenticatedContext();
 
-      this.firebaseApps.set(optionHash, firebase.initializeTestApp(config));
+      this.firebaseApps.set(optionHash, clientApp);
     }
 
     return this.firebaseApps.get(optionHash)!;
   }
 
-  getFirestore(auth?: TokenOptions) {
-    return this.getApp(auth).firestore();
+  async getFirestore(uid?: string) {
+    return (await this.getApp(uid)).firestore();
   }
 
   clearFirestore() {
-    return firebase.clearFirestoreData({ projectId: this.projectId });
+    return (this.getTestEnv()).then(testEnv => testEnv.clearFirestore());
   }
 
   cleanup() {
     this.adminFirebaseApp?.delete?.();
     this.adminFirebaseApp = null;
-    this.firebaseApps.forEach((app) => app?.delete?.());
     this.firebaseApps.clear();
   }
 
