@@ -17,6 +17,10 @@ type ImportableValue =
 export class Converter
   implements firestore.FirestoreDataConverter<ImportSource>
 {
+  private static TIMESTAMP_DATA_TYPE = 'timestamp';
+  private static GEOCODE_DATA_TYPE = 'geopoint';
+  private static DOCUMENT_REFERENCE_DATA_TYPE = 'documentReference';
+
   constructor(private readonly connection: firestore.Firestore) {}
 
   toFirestore(modelObject: ImportSource): firestore.DocumentData {
@@ -56,17 +60,17 @@ export class Converter
       );
     }
 
-    if ((<ImportSource>value)["__datatype__"] === "geopoint") {
+    if ((<ImportSource>value)["__datatype__"] === Converter.GEOCODE_DATA_TYPE) {
       return new firestore.GeoPoint(
         (<SerializeType<"geopoint">>value).value._latitude,
         (<SerializeType<"geopoint">>value).value._longitude
       );
-    } else if ((<ImportSource>value)["__datatype__"] === "timestamp") {
+    } else if ((<ImportSource>value)["__datatype__"] === Converter.TIMESTAMP_DATA_TYPE) {
       return new firestore.Timestamp(
         (<SerializeType<"timestamp">>value).value._seconds,
         (<SerializeType<"timestamp">>value).value._nanoseconds
       );
-    } else if ((<ImportSource>value)["__datatype__"] === "documentReference") {
+    } else if ((<ImportSource>value)["__datatype__"] === Converter.DOCUMENT_REFERENCE_DATA_TYPE) {
       return this.connection.doc(
         (<SerializeType<"documentReference">>value).value
       );
@@ -90,7 +94,7 @@ export class Converter
     switch (value?.constructor.name) {
       case "GeoPoint":
         return {
-          __datatype__: "geopoint",
+          __datatype__: Converter.GEOCODE_DATA_TYPE,
           value: {
             _latitude: (<firestore.GeoPoint>value).latitude,
             _longitude: (<firestore.GeoPoint>value).longitude,
@@ -98,7 +102,7 @@ export class Converter
         };
       case "Timestamp":
         return {
-          __datatype__: "timestamp",
+          __datatype__: Converter.TIMESTAMP_DATA_TYPE,
           value: {
             _seconds: (<firestore.Timestamp>value).seconds,
             _nanoseconds: (<firestore.Timestamp>value).nanoseconds,
@@ -106,7 +110,7 @@ export class Converter
         };
       case "DocumentReference":
         return {
-          __datatype__: "documentReference",
+          __datatype__: Converter.DOCUMENT_REFERENCE_DATA_TYPE,
           value: (<firestore.DocumentReference>value).path,
         };
       case "Object":
