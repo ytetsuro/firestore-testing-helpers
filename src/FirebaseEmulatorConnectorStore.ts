@@ -4,7 +4,7 @@ import { FirebaseEmulatorConnector } from "./FirebaseEmulatorConnector";
 export class FirebaseEmulatorConnectorStore {
   private static instances = new Map<string, FirebaseEmulatorConnector>();
   private static generateIdentity: () => string = () =>
-    (<any>global.jasmine ?? {}).testPath; // eslint-disable-line @typescript-eslint/no-explicit-any
+    expect.getState().testPath ?? (<any>global.jasmine ?? {}).testPath; // eslint-disable-line @typescript-eslint/no-explicit-any
 
   static setIdentityGenerator(identityGenerator: () => string) {
     this.generateIdentity = identityGenerator;
